@@ -1,4 +1,6 @@
 const container = document.querySelector('.container')
+const button = document.querySelector('button')
+const input = document.querySelector('input')
 
 function makesLines (container, amount) {
   for (let step = 0; step < amount; step++) {
@@ -16,17 +18,24 @@ function makesBoxes (line, amount) {
   }
 }
 
-function makesCustomSize () {
+function adjustsBoxes () {
+  const boxes = document.querySelectorAll('.box')
+  boxes.forEach((box) => {
+    box.addEventListener('mouseover', () => {
+      box.setAttribute('style', 'background-color: black')
+    })
+  })
 }
 
+// default grid
 makesLines(container, 4)
 const lines = document.querySelectorAll('.line')
 lines.forEach((line) => {
   makesBoxes(line, 4)
+  adjustsBoxes()
 })
 
-const button = document.querySelector('button')
-const input = document.querySelector('input')
+// generates a new grid
 button.addEventListener('click', () => {
   const newSize = input.value
   input.value = ''
@@ -36,4 +45,5 @@ button.addEventListener('click', () => {
   lines.forEach((line) => {
     makesBoxes(line, newSize)
   })
+  adjustsBoxes()
 })
